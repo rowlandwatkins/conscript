@@ -84,8 +84,10 @@ object Github extends Credentials {
     for {
       host <- Option(System getProperty "https.proxyHost")
       port <- Option(System getProperty "https.proxyPort")
+      principal <- Option(System getProperty "https.proxyUser")
+      password <- Option(System getProperty "https.proxyPassword")
     } {
-      req.setProxyServer(new ProxyServer(host, port.toInt))
+      req.setProxyServer(new ProxyServer(host, port.toInt, principal, password))
     }
     
     return req
