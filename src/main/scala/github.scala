@@ -80,7 +80,7 @@ object Github extends Credentials {
   }
   def gh(user: String, repo: String) : Req = {
     val req = withCredentials(:/("api.github.com").secure / "repos" / user / repo)
-
+    
     for {
       host <- Option(System getProperty "https.proxyHost")
       port <- Option(System getProperty "https.proxyPort")
@@ -99,5 +99,5 @@ object Github extends Credentials {
     """An unexpected error occurred: Please check your internet connection.
       |And if you're using a pre-release version of Java, please try with
       |a final release version.
-      |Exception message: %s""".stripMargin.format(e.getMessage)
+      |Exception message accessing Github: %s""".stripMargin.format(e.getMessage)
 }

@@ -1,3 +1,7 @@
+import AssemblyKeys._ // put this at the top of the file
+
+assemblySettings
+
 seq(conscriptSettings :_*)
 
 seq(lsSettings :_*)
@@ -22,12 +26,13 @@ libraryDependencies <<= (libraryDependencies, scalaVersion) {
 
 seq(ProguardPlugin.proguardSettings :_*)
 
-proguardOptions ++= Seq(
+ proguardOptions ++= Seq(
   "-keep class conscript.* { *; }",
   "-keep class dispatch.* { *; }",
   "-keep class org.apache.commons.logging.impl.LogFactoryImpl { *; }",
   "-keep class org.apache.commons.logging.impl.Jdk14Logger { *; }"
-)
+ )
+
 
 minJarPath <<= (target, version) { (t,v) =>
   t / ("conscript-" + v + ".jar")
